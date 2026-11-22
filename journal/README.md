@@ -30,13 +30,13 @@ journal/
 ## Weekly template
 
 ```markdown
-# 2026-W48 — <phase and week, e.g. 02_ROS2_Core Week 1>  (YYYY-MM-DD to YYYY-MM-DD)
+# 2026-W48 — <month and week, e.g. Month 2 · Week 5 (02_ROS2_Core)>  (YYYY-MM-DD to YYYY-MM-DD)
 
 ## Plan
 <the week's goal from the phase README>
 
 ## Built
-<what runs now, with paths: 02_ROS2_Core/codes/Week_1/Saturday/...>
+<what runs now, with paths: 02_ROS2_Core/codes/Week_5/Saturday/...>
 
 ## Broke, and why
 <the failures. The most valuable section: do not skip it>

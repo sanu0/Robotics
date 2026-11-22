@@ -4,7 +4,7 @@
 # Copies setup/, my_robot/ and every phase's codes/ folder from $ROBOTICS_REPO into
 # $ROBOTICS_HOME (default ~/Robotics), keeping the same relative paths:
 #
-#   $ROBOTICS_REPO/02_ROS2_Core/codes/Week_1/Day_3/  ->  ~/Robotics/02_ROS2_Core/codes/Week_1/Day_3/
+#   $ROBOTICS_REPO/02_ROS2_Core/codes/Week_5/Day_3/  ->  ~/Robotics/02_ROS2_Core/codes/Week_5/Day_3/
 #
 # Theory, journal and READMEs stay on Windows: you read them in Cursor, nothing builds them.
 #

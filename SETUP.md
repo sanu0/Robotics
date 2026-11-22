@@ -3,7 +3,7 @@
 > **This is Week 0, Day 1.** Every later week assumes it works.
 > **Success:** `bash ~/Robotics/setup/check_lab.sh` exits 0, Gazebo renders on your NVIDIA GPU, and a C++
 > talker reaches a Python listener.
-> **Budget:** two or three evenings. Steps 10–14 are for later phases; each says when you need it.
+> **Budget:** two or three evenings. Steps 10–14 are for later weeks; each says when you need it.
 
 ---
 
@@ -19,12 +19,12 @@
 - [Step 6 — Workspace, Sync Scripts and Shell Helpers](#step-6--workspace-sync-scripts-and-shell-helpers)
 - [Step 7 — Editor](#step-7--editor)
 - [Step 8 — Foxglove or Lichtblick on Windows](#step-8--foxglove-or-lichtblick-on-windows)
-- [Step 9 — Packages by Phase](#step-9--packages-by-phase)
-- [Step 10 — Later: Python ML Stack and Isaac Lab (Phases 07, 09)](#step-10--later-python-ml-stack-and-isaac-lab-phases-07-09)
-- [Step 11 — Later: Docker and the NVIDIA Container Toolkit (Phase 07–08)](#step-11--later-docker-and-the-nvidia-container-toolkit-phase-0708)
-- [Step 12 — Later: USB Devices into WSL (Phase 08)](#step-12--later-usb-devices-into-wsl-phase-08)
-- [Step 13 — Later: Talking to a Real Robot over Wi-Fi (Phase 08)](#step-13--later-talking-to-a-real-robot-over-wi-fi-phase-08)
-- [Step 14 — Later: Isaac Sim on a Cloud RTX GPU (Phase 09)](#step-14--later-isaac-sim-on-a-cloud-rtx-gpu-phase-09)
+- [Step 9 — Packages by Folder](#step-9--packages-by-folder)
+- [Step 10 — Later: Python ML Stack and Isaac Lab (Weeks 19, 23)](#step-10--later-python-ml-stack-and-isaac-lab-weeks-19-23)
+- [Step 11 — Later: Docker and the NVIDIA Container Toolkit (Weeks 19, 22)](#step-11--later-docker-and-the-nvidia-container-toolkit-weeks-19-22)
+- [Step 12 — Later: USB Devices into WSL (Week 21)](#step-12--later-usb-devices-into-wsl-week-21)
+- [Step 13 — Later: Talking to a Real Robot over Wi-Fi (Week 22)](#step-13--later-talking-to-a-real-robot-over-wi-fi-week-22)
+- [Step 14 — Later: Isaac Sim on a Cloud RTX GPU (Week 23)](#step-14--later-isaac-sim-on-a-cloud-rtx-gpu-week-23)
 - [Verify Everything](#verify-everything)
 - [Common Problems](#common-problems)
 
@@ -37,8 +37,8 @@
 | **Windows 11 host** | Always | This repo (OneDrive), Cursor, git, Foxglove |
 | **WSL2 `Ubuntu-24.04`** (dedicated to robotics) | Always | ROS 2 Jazzy, Gazebo, colcon, your code's working copy, CUDA via the Windows driver |
 | **`~/ros2_ws`** inside WSL | Always | colcon's `build/`, `install/`, `log/`. Disposable |
-| **Robot computer** (Raspberry Pi 5 or Jetson Orin Nano Super) | Phase 08+ | Ubuntu 24.04 (or JetPack 7.2) + ROS 2 Jazzy, on the robot |
-| **Cloud RTX GPU instance** | Phase 09 (one or two days) | Isaac Sim 6.2 and VLA fine-tuning, which need more than your laptop's 6 GB of VRAM |
+| **Robot computer** (Raspberry Pi 5 or Jetson Orin Nano Super) | Week 22 onward | Ubuntu 24.04 (or JetPack 7.2) + ROS 2 Jazzy, on the robot |
+| **Cloud RTX GPU instance** | Weeks 23–24 (one or two days) | Isaac Sim 6.2 and VLA fine-tuning, which need more than your laptop's 6 GB of VRAM |
 
 **Why ROS 2 Jazzy and Ubuntu 24.04**, not the newer Lyrical on 26.04: Isaac Sim 6.2 recommends Jazzy on
 24.04, Isaac ROS 4.6 is built and tested for Jazzy, and JetPack 7.2 for Jetson is Ubuntu 24.04. Every NVIDIA
@@ -98,7 +98,7 @@ than creating a second; make sure it has at least:
 memory=20GB          # Gazebo + Nav2 + RViz want 12 GB+; leave Windows at least 8 GB
 processors=12
 swap=8GB
-# networkingMode=mirrored    # turn on in Phase 08, when a real robot joins your network (Step 13)
+# networkingMode=mirrored    # turn on in Week 22, when a real robot joins your network (Step 13)
 ```
 
 Then `wsl --shutdown` from PowerShell and reopen the distro. Plan on **40 GB+ free** inside WSL.
@@ -153,7 +153,7 @@ sudo dpkg -i /tmp/ros2-apt-source.deb
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y ros-jazzy-desktop ros-dev-tools
 
-# Build helpers used throughout Phase 01 onward
+# Build helpers used from Week 1 onward
 sudo apt install -y build-essential cmake ninja-build gdb ccache clangd rsync git
 
 # rosdep
@@ -293,25 +293,26 @@ Connect to `ws://localhost:8765`. WSL forwards localhost ports to Windows by def
 
 ---
 
-## Step 9 — Packages by Phase
+## Step 9 — Packages by Folder
 
-Install as each phase needs them. Each phase README repeats its own line. Package names are correct for
-Jazzy to the best of current knowledge; if `apt` cannot find one, try `apt search ros-jazzy-<keyword>`.
+Install as each folder's weeks need them. Each phase folder's README repeats its own line. Package names are
+correct for Jazzy to the best of current knowledge; if `apt` cannot find one, try
+`apt search ros-jazzy-<keyword>`.
 
-| Phase | Packages |
+| Folder (weeks) | Packages |
 |---|---|
-| 01 C++ | `libgtest-dev libgmock-dev libeigen3-dev clang-format clang-tidy valgrind` |
-| 02 ROS 2 Core | `ros-jazzy-rmw-cyclonedds-cpp ros-jazzy-rmw-zenoh-cpp ros-jazzy-foxglove-bridge ros-jazzy-diagnostic-updater ros-jazzy-diagnostic-aggregator ros-jazzy-rqt-robot-monitor` |
-| 03 Modeling & Sim | `ros-jazzy-xacro ros-jazzy-joint-state-publisher-gui ros-jazzy-ros2-control ros-jazzy-ros2-controllers ros-jazzy-gz-ros2-control ros-jazzy-teleop-twist-keyboard ros-jazzy-teleop-twist-joy ros-jazzy-twist-mux ros-jazzy-urdf-tutorial` |
-| 04 Navigation | `ros-jazzy-navigation2 ros-jazzy-nav2-bringup ros-jazzy-slam-toolbox ros-jazzy-robot-localization` |
-| 05 Manipulation | `ros-jazzy-moveit ros-jazzy-ur ros-jazzy-pick-ik ros-jazzy-apriltag-ros ros-jazzy-moveit-servo` |
-| 06 Theory | `python3-numpy python3-scipy python3-matplotlib` + `pip install mujoco osqp` (in a venv) |
-| 07 Perception | `ros-jazzy-vision-opencv ros-jazzy-image-pipeline ros-jazzy-image-transport-plugins ros-jazzy-perception-pcl ros-jazzy-depthimage-to-laserscan ros-jazzy-rtabmap-ros ros-jazzy-vision-msgs python3-open3d` |
-| 08 Build Your Robot | `ros-jazzy-rosbridge-suite ros-jazzy-web-video-server ros-jazzy-usb-cam` |
+| 01 C++ (1–3) | `libgtest-dev libgmock-dev libeigen3-dev clang-format clang-tidy valgrind` |
+| 02 ROS 2 Core (5–7) | `ros-jazzy-rmw-cyclonedds-cpp ros-jazzy-rmw-zenoh-cpp ros-jazzy-foxglove-bridge ros-jazzy-diagnostic-updater ros-jazzy-diagnostic-aggregator ros-jazzy-rqt-robot-monitor` |
+| 03 Modeling & Sim (9–10) | `ros-jazzy-xacro ros-jazzy-joint-state-publisher-gui ros-jazzy-ros2-control ros-jazzy-ros2-controllers ros-jazzy-gz-ros2-control ros-jazzy-teleop-twist-keyboard ros-jazzy-teleop-twist-joy ros-jazzy-twist-mux ros-jazzy-urdf-tutorial` |
+| 04 Navigation (11, 13) | `ros-jazzy-navigation2 ros-jazzy-nav2-bringup ros-jazzy-slam-toolbox ros-jazzy-robot-localization` |
+| 05 Manipulation (14–15) | `ros-jazzy-moveit ros-jazzy-ur ros-jazzy-pick-ik ros-jazzy-apriltag-ros ros-jazzy-moveit-servo` |
+| 06 Theory (17–18) | `python3-numpy python3-scipy python3-matplotlib` + `pip install mujoco osqp` (in a venv) |
+| 07 Perception (19) | `ros-jazzy-vision-opencv ros-jazzy-image-pipeline ros-jazzy-image-transport-plugins ros-jazzy-perception-pcl ros-jazzy-depthimage-to-laserscan ros-jazzy-rtabmap-ros ros-jazzy-vision-msgs python3-open3d` |
+| 08 Build Your Robot (21–22) | `ros-jazzy-rosbridge-suite ros-jazzy-web-video-server ros-jazzy-usb-cam` |
 
 ---
 
-## Step 10 — Later: Python ML Stack and Isaac Lab (Phases 07, 09)
+## Step 10 — Later: Python ML Stack and Isaac Lab (Weeks 19, 23)
 
 ROS uses the system Python. Machine-learning tools each get their **own** environment, so neither can break
 the other.
@@ -324,19 +325,19 @@ uv pip install torch torchvision                        # CUDA wheels; check the
 python -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0))"
 ```
 
-- **Ultralytics YOLO (Phase 07):** `uv pip install ultralytics` in that environment
-- **Isaac Lab 3.0 (Phase 09):** follow the [official installation](https://isaac-sim.github.io/IsaacLab/); its
+- **Ultralytics YOLO (Week 19):** `uv pip install ultralytics` in that environment
+- **Isaac Lab 3.0 (Week 23):** follow the [official installation](https://isaac-sim.github.io/IsaacLab/); its
   `uv`-based installer creates its own environment. The default Newton backend needs no Isaac Sim and runs on
   your RTX GPU (Windows 11 natively, or WSL/Ubuntu)
-- **LeRobot (Phase 09):** its own environment, with the Python version its docs specify
+- **LeRobot (Week 24):** its own environment, with the Python version its docs specify
 
 To use a venv *with* ROS packages visible, create it with `--system-site-packages`.
 
 ---
 
-## Step 11 — Later: Docker and the NVIDIA Container Toolkit (Phase 07–08)
+## Step 11 — Later: Docker and the NVIDIA Container Toolkit (Weeks 19, 22)
 
-Isaac ROS (Phase 07) and your robot's images (Phase 08) use Docker. Docker Engine installed inside WSL avoids
+Isaac ROS (Week 19) and your robot's images (Week 22) use Docker. Docker Engine installed inside WSL avoids
 Docker Desktop's licensing terms for large companies:
 
 ```bash
@@ -351,7 +352,7 @@ check GPU access with `docker run --rm --gpus all ubuntu nvidia-smi`.
 
 ---
 
-## Step 12 — Later: USB Devices into WSL (Phase 08)
+## Step 12 — Later: USB Devices into WSL (Week 21)
 
 An ESP32, a lidar or the SO-101's servo board plug into Windows; `usbipd-win` passes them through to WSL.
 
@@ -373,7 +374,7 @@ laptop, and real cameras on the robot computer.
 
 ---
 
-## Step 13 — Later: Talking to a Real Robot over Wi-Fi (Phase 08)
+## Step 13 — Later: Talking to a Real Robot over Wi-Fi (Week 22)
 
 WSL's default NAT networking blocks the multicast DDS uses for discovery, so the laptop and the robot cannot
 see each other. Two fixes:
@@ -397,7 +398,7 @@ Either way: keep the clocks in sync (`chrony` on both machines), or TF will comp
 
 ---
 
-## Step 14 — Later: Isaac Sim on a Cloud RTX GPU (Phase 09)
+## Step 14 — Later: Isaac Sim on a Cloud RTX GPU (Week 23)
 
 Isaac Sim 6.2 needs an RTX GPU with 16 GB of VRAM and 32 GB of RAM; your laptop has 6 GB of VRAM. For the one
 or two days you need it:

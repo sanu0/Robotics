@@ -201,7 +201,7 @@ if have nvidia-smi; then
     warn "nvidia-smi exists but returned nothing"
   fi
 else
-  warn "nvidia-smi not found; CUDA work in Phases 07 and 09 needs the GPU visible in Linux"
+  warn "nvidia-smi not found; CUDA work in Weeks 19 and 23 needs the GPU visible in Linux"
   if (( IN_WSL == 1 )); then
     hint "In WSL it comes from the Windows driver (/usr/lib/wsl/lib). Never install a Linux NVIDIA driver inside WSL"
   fi
@@ -241,7 +241,7 @@ if have g++; then
   if version_ge "$gv" 13; then
     pass "g++ $gv (C++20 ready)"
   else
-    warn "g++ $gv; Phase 01 assumes GCC 13 or newer"
+    warn "g++ $gv; Weeks 1-3 assume GCC 13 or newer"
   fi
 else
   fail "g++ missing"

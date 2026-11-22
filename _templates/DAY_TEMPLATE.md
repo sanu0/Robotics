@@ -3,8 +3,11 @@ DAY LESSON TEMPLATE
 Every theory/Week_N/Day_N.md follows this shape, so a lesson generated in Week 20 feels like one from
 Week 1. Generate a lesson only when the learner reaches that day (see README "How the Daily Notes Work").
 
+IDs: M<month>W<week>D<day>, e.g. M3W9D1 = Month 3, Week 9, Day 1. Week numbers are global (0–26), and the
+week decides the phase folder (see the main README's "Phase Folders" table). Saturday = M3W9SAT.
+
 Inputs when generating:
-  1. The day's checklist in <phase>/README.md (the plan; cover every item, add nothing that is not needed)
+  1. The day's checklist in the main README.md (the plan; cover every item, add nothing that is not needed)
   2. The previous lesson, especially its "Next:" line and "What I still do not understand"
   3. The learner's journal entries from the last few days, if any
   4. The Catch-up Ledger in the main README (skipped prerequisites change how you explain things)
@@ -13,6 +16,8 @@ Outputs:
   - <phase>/theory/Week_N/Day_N.md                 (this template, filled in)
   - <phase>/codes/Week_N/Day_N/                     (demos, deliberate-error files, starter code,
                                                      check_dayN.sh whose exit code = number of failures)
+  - Saturday projects: <phase>/theory/Week_N/Saturday.md and <phase>/codes/Week_N/Saturday/
+  - Monthly projects:  <phase>/theory/Projects/<Name>.md and <phase>/codes/Projects/<Name>/
 
 House style:
   - Plain, friendly sentences. Explain every new term the first time it appears, in a "🆕 New" box.
@@ -24,7 +29,7 @@ House style:
   - 2 to 2.5 hours total, including running everything.
 -->
 
-# P0X·WN·DN — <Title>
+# M<m>W<w>D<d> — <Title>
 
 > **What you need to know already:** <prerequisites, linked to earlier lessons; note any Catch-up Ledger gaps>
 >
@@ -198,4 +203,4 @@ bash ~/Robotics/<phase>/codes/Week_N/Day_N/check_dayN.sh
 
 ---
 
-**Next:** P0X·WN·D(N+1) — <title and one sentence on what comes next.>
+**Next:** M<m>W<w>D<d+1> — <title and one sentence on what comes next.>

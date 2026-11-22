@@ -22,11 +22,11 @@ Building on `/mnt/c/...` is several times slower, NTFS drops the executable bit 
 repo stays on Windows, and these scripts bridge it to WSL.
 
 ```text
-02_ROS2_Core/codes/Week_1/Day_3/          (Windows repo, edited in Cursor)
+02_ROS2_Core/codes/Week_5/Day_3/          (Windows repo, edited in Cursor)
         │  rpull  = sync_from_repo.sh
         ▼
-~/Robotics/02_ROS2_Core/codes/Week_1/Day_3/   (WSL working copy)
-        │  rb 02_ROS2_Core/codes/Week_1/Day_3
+~/Robotics/02_ROS2_Core/codes/Week_5/Day_3/   (WSL working copy)
+        │  rb 02_ROS2_Core/codes/Week_5/Day_3
         ▼
 ~/ros2_ws/build + install                 (colcon output, sourced automatically by rb)
 ```
@@ -51,7 +51,7 @@ bash ~/Robotics/setup/check_lab.sh
 
 ```bash
 rpull                                      # repo -> WSL
-rb 02_ROS2_Core/codes/Week_1/Day_3         # build that day's packages and source them
+rb 02_ROS2_Core/codes/Week_5/Day_3         # build that day's packages and source them
 ros2 run ...                               # work, break things, fix them
 rpush                                      # WSL -> repo, then commit from Windows
 ```
