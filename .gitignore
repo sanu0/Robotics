@@ -1,0 +1,110 @@
+# ─── Secrets and machine-local state ─────────────────────────────
+.env
+.env.*
+*.key
+*.pem
+.netrc
+*token*.txt
+wpa_supplicant*.conf
+
+# Everything under _internal/ stays local, with no exceptions — not even its README.
+# It holds hostnames, robot IPs, Wi-Fi credentials, API tokens, maps of your home,
+# and anything whose source is not public. See _internal/README.md (local only).
+_internal/
+
+# ─── colcon / ROS 2 build output ─────────────────────────────────
+# Matches at any depth, so a workspace inside my_robot/ or a day folder is covered too.
+# Never ignore COLCON_IGNORE files: they are deliberate markers.
+build/
+install/
+log/
+compile_commands.json
+.cache/
+
+# ─── ROS data: bags, recordings ──────────────────────────────────
+# Bags are gigabytes. Keep a tiny test bag only on purpose: `git add -f`, or Git LFS.
+rosbag2_*/
+*.bag
+*.db3
+*.db3-shm
+*.db3-wal
+*.mcap
+
+# ─── Machine learning: weights, runs, datasets ───────────────────
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.engine
+*.plan
+*.trt
+wandb/
+runs/
+outputs/
+checkpoints/
+datasets/
+
+# ─── Firmware build output (PlatformIO, Arduino, Pico SDK) ───────
+.pio/
+.pioenvs/
+*.elf
+*.hex
+*.uf2
+*.bin
+
+# ─── Fabrication output (sliced, printer-specific) ───────────────
+# STL/STEP/3MF sources ARE committed (consider Git LFS); G-code is a build artifact.
+*.gcode
+*.bgcode
+
+# ─── Video ───────────────────────────────────────────────────────
+# Host demo videos on YouTube or a release asset; link them from the README.
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.avi
+
+# ─── Python / tooling ────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ─── C++ / CMake leftovers outside colcon ────────────────────────
+cmake-build-*/
+CMakeUserPresets.json
+*.o
+*.a
+*.so
+*.gcda
+*.gcno
+coverage/
+
+# ─── Web dashboard ───────────────────────────────────────────────
+node_modules/
+dist/
+.vite/
+
+# ─── Logs ────────────────────────────────────────────────────────
+*.log
+
+# ─── IDE / OS junk ───────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ─── Books and copyrighted material ──────────────────────────────
+# Own the books and datasheets; do not redistribute them. Link to the public URL instead.
+*.pdf
+*.epub
+*.mobi

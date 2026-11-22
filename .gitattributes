@@ -1,0 +1,82 @@
+# Everything that runs or is parsed on the Linux side must have LF endings.
+# A CRLF shebang kills a Python node with "/usr/bin/env: 'python3\r': No such file or directory",
+# bash scripts fail the same way, and xacro/URDF/YAML parsers trip over stray \r characters.
+* text=auto
+
+*.sh            text eol=lf
+*.bash          text eol=lf
+*.py            text eol=lf
+*.c             text eol=lf
+*.cc            text eol=lf
+*.cpp           text eol=lf
+*.cxx           text eol=lf
+*.h             text eol=lf
+*.hh            text eol=lf
+*.hpp           text eol=lf
+*.ino           text eol=lf
+CMakeLists.txt  text eol=lf
+*.cmake         text eol=lf
+package.xml     text eol=lf
+*.xml           text eol=lf
+*.launch        text eol=lf
+*.urdf          text eol=lf
+*.xacro         text eol=lf
+*.srdf          text eol=lf
+*.sdf           text eol=lf
+*.world         text eol=lf
+*.yaml          text eol=lf
+*.yml           text eol=lf
+*.toml          text eol=lf
+*.cfg           text eol=lf
+*.ini           text eol=lf
+*.repos         text eol=lf
+*.msg           text eol=lf
+*.srv           text eol=lf
+*.action        text eol=lf
+*.usda          text eol=lf
+Dockerfile      text eol=lf
+*.dockerfile    text eol=lf
+Makefile        text eol=lf
+*.js            text eol=lf
+*.ts            text eol=lf
+*.html          text eol=lf
+*.css           text eol=lf
+*.json          text eol=lf
+
+# Windows-only helpers keep Windows endings.
+*.ps1           text eol=crlf
+*.bat           text eol=crlf
+
+# Large text formats where a diff is noise.
+*.dae           -diff
+*.step          -diff
+*.stp           -diff
+
+# Binary assets: never convert, never diff.
+*.stl           binary
+*.STL           binary
+*.glb           binary
+*.usdc          binary
+*.usdz          binary
+*.3mf           binary
+*.f3d           binary
+*.pgm           binary
+*.png           binary
+*.jpg           binary
+*.jpeg          binary
+*.gif           binary
+*.mcap          binary
+*.db3           binary
+*.pt            binary
+*.onnx          binary
+*.pdf           binary
+
+# ─── Git LFS (optional) ──────────────────────────────────────────
+# Meshes, CAD and maps grow the history fast. After `git lfs install`, uncomment what you use:
+# *.stl  filter=lfs diff=lfs merge=lfs -text
+# *.STL  filter=lfs diff=lfs merge=lfs -text
+# *.dae  filter=lfs diff=lfs merge=lfs -text
+# *.glb  filter=lfs diff=lfs merge=lfs -text
+# *.usdc filter=lfs diff=lfs merge=lfs -text
+# *.3mf  filter=lfs diff=lfs merge=lfs -text
+# *.f3d  filter=lfs diff=lfs merge=lfs -text
